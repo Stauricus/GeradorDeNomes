@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gerador Aleatório de Nomes</title>
+  <meta charset="UTF-8">
+</head>
+<body style="background-color:aliceblue;">
+
+<h2>Gerador Aleatório de Nomes! 500 nomezinhos pra você (em ordem alfabética)! &#128054; &#128049;</h2>
+
+<p id="demonst"></p>
+<p><br><hr>Obs.: Esse gerador usa algumas regras básicas pra gerar nomes aleatórios. Às vezes podem aparecer palavrões também, então foi mal :)
+<br>Se você atualizar a página (F5), os nomes mudam. Vai tentando aí que uma hora dá certo.</p>
+
+<script>
+	var letras = ["a", "e", "i", "o", "u", "b", "c", "d", "f", "g", "j", "l", "m", "n", "p", "q", "r", "s", "t", "v", "x", "z"];
+	var vogais = ["a", "e", "i", "o", "u"];
+	var extras = ["l", "m", "n", "r", "s", "x","z"];
+	var lista_final = [];
+	
+	for (var i = 0; i < 500; i++){
+		var nome = " ";
+		var silabas = Math.floor(Math.random()*3+2);
+		for (var n = 1; n <= silabas; n++){
+			var letr = letras[Math.floor(Math.random()*letras.length)];
+			var vog = vogais[Math.floor(Math.random()*vogais.length)];
+			var extr = extras[Math.floor(Math.random()*extras.length)];
+			
+			nome = nome+letr;
+			switch (letr){
+        case "q":
+          if (vog != "u"){nome = nome+"u";}
+          else {nome = nome+vogais[Math.floor(Math.random()*vog.length)];}
+          break;
+        case "c":
+					if (Math.floor(Math.random()*4) == 0){nome = nome+"h";}
+          break;
+        case "l":
+					if (Math.floor(Math.random()*4) == 0){nome = nome+"h";}
+          break;
+        case "n":
+          if (Math.floor(Math.random()*5) == 0){nome = nome+"h";}
+          break;
+        case "g":
+          if (Math.floor(Math.random()*4) == 0){nome = nome+"u";}
+          break;
+        case "s":
+					if (Math.floor(Math.random()*3) == 0 && n != 1 && n != silabas){nome = nome+letr;}
+        case "r":
+          if (Math.floor(Math.random()*3) == 0 && n != 1 && n != silabas){nome = nome+letr;}
+        default:
+          break;
+        }
+        nome = nome+vog;
+        if (Math.floor(Math.random()*10 == 0)){nome = nome+extr;}
+		}
+		lista_final.push(nome);
+	}
+	lista_final.sort();
+	lista_final = lista_final.map(word => word.replace(/([^rs])\1+/g, '$1'));
+
+
+document.getElementById("demonst").innerHTML = lista_final + ".";
+</script>
+
+</body>
+</html>
